@@ -1,23 +1,19 @@
 fun main() {
     println("Bem-vindo ao Bytebank")
 
-    val contaLeonardo = Conta()
-    contaLeonardo.titular = "Leonardo"
-    contaLeonardo.numero = 1000
-    contaLeonardo.setSaldo(1000.0)
+    val contaLeonardo = Conta("Leonardo", 1000)
+    contaLeonardo.deposita(1000.0)
     println(contaLeonardo.titular)
     println(contaLeonardo.numero)
-    println(contaLeonardo.getSaldo())
+    println(contaLeonardo.saldo)
 
-    val contaNayara = Conta()
-    contaNayara.titular = "Nayara"
-    contaNayara.numero = 1001
-    contaNayara.setSaldo(5000.0)
+    val contaNayara = Conta("Nayara", 1001)
+    contaNayara.deposita(5000.0)
     println(contaNayara.titular)
     println(contaNayara.numero)
-    println(contaNayara.getSaldo())
+    println(contaNayara.saldo)
 
-    /*
+
     println("Depositando na conta do Leonardo")
     contaLeonardo.deposita(50.0)
     println(contaLeonardo.saldo)
@@ -32,7 +28,7 @@ fun main() {
 
     println("Transferencia de Leonardo para Nayara")
 
-    if(contaLeonardo.transfere(100.0, contaNayara)) {
+    if (contaLeonardo.transfere(100.0, contaNayara)) {
         println("Transferência bem sucedida")
     } else {
         println("Falha na transferencia")
@@ -40,16 +36,24 @@ fun main() {
     println(contaNayara.saldo)
     println(contaLeonardo.saldo)
 
-    */
 }
 
-class Conta {
-    var titular = ""
-    var numero = 0
-    private var saldo = 0.0
+class Conta(
+    val titular: String,
+    val numero: Int
+) {
+    var saldo = 0.0
+        private set
+
+//    constructor(titular: String, numero: Int){
+//        this.titular = titular
+//        this.numero = numero
+//    }
 
     fun deposita(valor: Double) {
-        this.saldo += valor
+        if (valor > 0) {
+            this.saldo += valor
+        }
     }
 
     fun saca(valor: Double) {
@@ -67,29 +71,29 @@ class Conta {
         return false
     }
 
-    fun getSaldo(): Double  {
-        return saldo
-    }
-
-    fun setSaldo(valor: Double) {
-        if(valor > 0) {
-            saldo = valor
+    /*    fun getSaldo(): Double  {
+            return saldo
         }
-    }
+
+        fun setSaldo(valor: Double) {
+            if(valor > 0) {
+                saldo = valor
+            }
+        } */
 }
 
 fun testaCopiasEReferencias() {
-    val numeroX = 10
+    var numeroX = 10
     var numeroY = numeroX
     numeroY++
 
     println("numeroX $numeroX")
     println("numeroY $numeroY")
 
-    val contaJoao = Conta()
-    contaJoao.titular = "João"
-    var contaMaria = contaJoao
-    contaMaria.titular = "Maria"
+//    val contaJoao = Conta()
+//    contaJoao.titular = "João"
+//    var contaMaria = contaJoao
+//    contaMaria.titular = "Maria"
 }
 
 fun testaLacos() {
